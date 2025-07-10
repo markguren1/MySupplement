@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MySupplement</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    // JSON data
+    const supplementData = [
+      { name: "Melatonin", category: "Sleep", uses: "Studied for sleep support, may help regulate sleep cycles. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Ashwagandha", category: "Anxiety/Stress", uses: "Studied for stress reduction and anxiety relief. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Vitamin C", category: "Immune Support", uses: "Studied for immune health and antioxidant properties. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Omega-3", category: "Heart & Circulation", uses: "Studied for cardiovascular health and reducing inflammation. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Caffeine", category: "Energy & Metabolism", uses: "Studied for energy enhancement and improved alertness. Source: Mayo Clinic.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Probiotics", category: "Digestion & Gut Health", uses: "Studied for digestive balance and gut health. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Glucosamine", category: "Joint & Bone Health", uses: "Studied for joint health and osteoarthritis support. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Ginkgo", category: "Cognitive & Mood", uses: "Studied for cognitive support and memory enhancement. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Lutein", category: "Eye Health", uses: "Studied for eye health and reducing age-related macular degeneration risk. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Saw Palmetto", category: "Men’s Health", uses: "Studied for prostate health and urinary function. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Evening Primrose", category: "Women’s Health", uses: "Studied for hormonal balance and menopausal symptoms. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Bacopa", category: "Focus/Memory", uses: "Studied for memory support and cognitive function. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "St. John’s Wort", category: "Mood Support", uses: "Studied for mood support and mild depression relief. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Biotin", category: "Skin & Hair", uses: "Studied for hair and skin health. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Green Tea Extract", category: "Weight Loss", uses: "Studied for weight management and metabolism support. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
+      { name: "Vitamin D", category: "Joint & Bone Health", uses: "Studied for bone health and calcium absorption. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." }
+    ];
+
+    const categories = [
+      "Sleep", "Anxiety/Stress", "Immune Support", "Heart & Circulation", "Energy & Metabolism",
+      "Digestion & Gut Health", "Joint & Bone Health", "Cognitive & Mood", "Eye Health", "Men’s Health",
+      "Women’s Health", "Focus/Memory", "Mood Support", "Skin & Hair", "Weight Loss"
+    ];
+
+    const NavBar = ({ setPage }) => (
+      <nav className="bg-blue-600 text-white p-4">
+        <ul className="flex flex-wrap space-x-4 justify-center text-lg">
+          <li><a href="#" onClick={() => setPage('home')} className="hover:underline">Home</a></li>
+          <li><a href="#" onClick={() => setPage('search')} className="hover:underline">Search</a></li>
+          <li><a href="#" onClick={() => setPage('quiz')} className="hover:underline">Adaptive Quiz</a></li>
+          <li><a href="#" onClick={() => setPage('features')} className="hover:underline">Features</a></li>
+          <li><a href="#" onClick={() => setPage('resources')} className="hover:underline">Resources</a></li>
+          <li><a href="#" onClick={() => setPage('disclaimer')} className="hover:underline">Disclaimer</a></li>
+        </ul>
+      </nav>
+    );
+
+    const Home = ({ setPage }) => {
+      const [query, setQuery] = useState('');
+      const [results, setResults] = useState(null);
+
+      const handleSearch = () => {
+        const result = supplementData.find(
+          item => item.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setResults(result || { name: query, uses: "No information found in database. Try another supplement!", disclaimer: "For educational purposes only; consult a healthcare provider." });
+      };
+
+      const handleCategoryClick = (category) => {
+        const categoryResults = supplementData.filter(
+          item => item.category === category
+        );
+        setResults(categoryResults.length ? categoryResults[0] : { name: category, uses: "No supplements found for this category.", disclaimer: "For educational purposes only; consult a healthcare provider." });
+      };
+
+      return (
+        <div className="container mx-auto p-4">
+          <h1 className="text-4xl font-bold text-blue-600 mb-4">MySupplement</h1>
+          <p className="text-2xl mb-4">AI Engineered, Human Inspired!</p>
+          <p className="text-xl mb-4">Blast through the supplement minutia with MySupplement. Fast. Clear. Concise.</p>
+          <p className="text-lg mb-4 bg-green-100 p-2 rounded">MySupplement: Free, Factual Supplement Info</p>
+          <h2 className="text-2xl font-semibold mb-4">Explore Categories</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => handleCategoryClick(cat)}
+                className="p-4 bg-gray-100 rounded text-lg hover:bg-gray-200"
+                title={`Examples: ${supplementData.find(item => item.category === cat)?.name || 'Various supplements'}`}
+              >
+                {cat === "Sleep" ? "🌙 Sleep" :
+                 cat === "Anxiety/Stress" ? "😌 Anxiety/Stress" :
+                 cat === "Immune Support" ? "🛡️ Immune Support" :
+                 cat === "Heart & Circulation" ? "❤️ Heart & Circulation" :
+                 cat === "Energy & Metabolism" ? "⚡ Energy & Metabolism" :
+                 cat === "Digestion & Gut Health" ? "🍽️ Digestion & Gut Health" :
+                 cat === "Joint & Bone Health" ? "💪 Joint & Bone Health" :
+                 cat === "Cognitive & Mood" ? "🧠 Cognitive & Mood" :
+                 cat === "Eye Health" ? "👁️ Eye Health" :
+                 cat === "Men’s Health" ? "♂️ Men’s Health" :
+                 cat === "Women’s Health" ? "♀️ Women’s Health" :
+                 cat === "Focus/Memory" ? "🎯 Focus/Memory" :
+                 cat === "Mood Support" ? "😊 Mood Support" :
+                 cat === "Skin & Hair" ? "💇 Skin & Hair" :
+                 "⚖️ Weight Loss"}
+              </button>
+            ))}
+          </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search supplement (e.g., Melatonin)"
+              className="w-full p-3 border rounded text-lg"
+            />
+            <button
+              onClick={handleSearch}
+              className="bg-blue-500 text-white p-3 rounded mt-2"
+            >
+              Search
+            </button>
+          </div>
+          {results && (
+            <div className="mt-4 p-4 border rounded">
+              <h2 className="text-2xl font-semibold">{results.name}</h2>
+              <p className="text-lg">{results.uses}</p>
+              <p className="text-sm italic mt-2">{results.disclaimer}</p>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const Search = () => {
+      const [query, setQuery] = useState('');
+      const [results, setResults] = useState(null);
+
+      const handleSearch = () => {
+        const result = supplementData.find(
+          item => item.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setResults(result || { name: query, uses: "No information found in database. Try another supplement!", disclaimer: "For educational purposes only; consult a healthcare provider." });
+      };
+
+      return (
+        <div className="container mx-auto p-4">
+          <h1 className="text-3xl font-bold mb-4">Supplement Search</h1>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Enter supplement name (e.g., Glucosamine)"
+            className="w-full p-3 mb-4 border rounded text-lg"
+          />
+          <button
+            onClick={handleSearch}
+            className="bg-blue-500 text-white p-3 rounded"
+          >
+            Search
+          </button>
+          {results && (
+            <div className="mt-4 p-4 border rounded">
+              <h2 className="text-2xl font-semibold">{results.name}</h2>
+              <p className="text-lg">{results.uses}</p>
+              <p className="text-sm italic mt-2">{results.disclaimer}</p>
+            </div>
+          )}
+          {!results && (
+            <p className="text-lg mt-4">Enter a supplement name to see results!</p>
+          )}
+        </div>
+      );
+    };
+
+    const Resources = ({ setPage }) => (
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-4">Resources</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <a
+            href="https://forms.gle/feedback-form-placeholder"
+            target="_blank"
+            className="p-4 bg-gray-100 rounded text-lg hover:bg-gray-200"
+          >
+            Feedback
+          </a>
+          <button
+            onClick={() => setPage('quiz')}
+            className="p-4 bg-gray-100 rounded text-lg hover:bg-gray-200"
+          >
+            Adaptive Quiz
+          </button>
+        </div>
+      </div>
+    );
+
+    const Features = () => (
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-4">Features</h1>
+        <h2 className="text-2xl font-semibold mb-2">Why We Developed MySupplement</h2>
+        <p className="text-lg mb-4">
+          To provide a free, factual, user-friendly platform delivering evidence-based supplement information, aligning with “AI Engineered, Human Inspired” and “Fast. Clear. Concise” for broad engagement.
+        </p>
+        <h2 className="text-2xl font-semibold mb-2">Who Will Benefit</h2>
+        <ul className="list-disc pl-6 mb-4 text-lg">
+          <li><strong>Seniors</strong>: Accessible search and quiz for supplement info, tailored to their needs (e.g., joint health, vision).</li>
+          <li><strong>Healthcare Providers/Students</strong>: Fast, reliable data via search and quiz for clinical and study use.</li>
+          <li><strong>General Users</strong>: Engaging tools for wellness exploration.</li>
+        </ul>
+        <h2 className="text-2xl font-semibold mb-2">Sample Supplement Facts</h2>
+        <ul className="list-disc pl-6 text-lg">
+          <li>Melatonin: Studied for sleep support. Source: NIH.</li>
+          <li>Omega-3: Studied for cardiovascular health. Source: PubMed.</li>
+          <li>Vitamin D: Studied for bone health. Source: ODS.</li
