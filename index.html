@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -15,27 +15,37 @@
     const { useState } = React;
 
     const supplementData = [
-      { name: "Melatonin", category: "Sleep", uses: "Studied for sleep support, may help regulate sleep cycles. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Ashwagandha", category: "Anxiety/Stress", uses: "Studied for stress reduction and anxiety relief. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Vitamin C", category: "Immune Support", uses: "Studied for immune health and antioxidant properties. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Omega-3", category: "Heart & Circulation", uses: "Studied for cardiovascular health and reducing inflammation. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Caffeine", category: "Energy & Metabolism", uses: "Studied for energy enhancement and improved alertness. Source: Mayo Clinic.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Probiotics", category: "Digestion & Gut Health", uses: "Studied for digestive balance and gut health. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Glucosamine", category: "Joint & Bone Health", uses: "Studied for joint health and osteoarthritis support. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Ginkgo", category: "Cognitive & Mood", uses: "Studied for cognitive support and memory enhancement. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Lutein", category: "Eye Health", uses: "Studied for eye health and reducing age-related macular degeneration risk. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Saw Palmetto", category: "Men’s Health", uses: "Studied for prostate health and urinary function. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Evening Primrose", category: "Women’s Health", uses: "Studied for hormonal balance and menopausal symptoms. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Bacopa", category: "Focus/Memory", uses: "Studied for memory support and cognitive function. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "St. John’s Wort", category: "Mood Support", uses: "Studied for mood support and mild depression relief. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Biotin", category: "Skin & Hair", uses: "Studied for hair and skin health. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Green Tea Extract", category: "Weight Loss", uses: "Studied for weight management and metabolism support. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Vitamin D", category: "Joint & Bone Health", uses: "Studied for bone health and calcium absorption. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Vitamin B12", category: "Energy & Metabolism", uses: "Studied for energy support and nerve function. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Magnesium", category: "Sleep", uses: "Studied for muscle relaxation and sleep support. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Turmeric", category: "Joint & Bone Health", uses: "Studied for anti-inflammatory effects and joint health. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "CoQ10", category: "Heart & Circulation", uses: "Studied for heart health and energy production. Source: Mayo Clinic.", disclaimer: "For educational purposes only; consult a healthcare provider." },
-      { name: "Zinc", category: "Immune Support", uses: "Studied for immune function and wound healing. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider." }
+      { name: "Melatonin", category: "Sleep", uses: "Studied for sleep support, may help regulate sleep cycles. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Ashwagandha", category: "Anxiety/Stress", uses: "Studied for stress reduction and anxiety relief. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Vitamin C", category: "Immune Support", uses: "Studied for immune health and antioxidant properties. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Omega-3", category: "Heart & Circulation", uses: "Studied for cardiovascular health and reducing inflammation. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Caffeine", category: "Energy & Metabolism", uses: "Studied for energy enhancement and improved alertness. Source: Mayo Clinic.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Probiotics", category: "Digestion & Gut Health", uses: "Studied for digestive balance and gut health. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Glucosamine", category: "Joint & Bone Health", uses: "Studied for joint health and osteoarthritis support. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Ginkgo", category: "Cognitive & Mood", uses: "Studied for cognitive support and memory enhancement. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Low" },
+      { name: "Lutein", category: "Eye Health", uses: "Studied for eye health and reducing age-related macular degeneration risk. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Saw Palmetto", category: "Men’s Health", uses: "Studied for prostate health and urinary function. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Low" },
+      { name: "Evening Primrose", category: "Women’s Health", uses: "Studied for hormonal balance and menopausal symptoms. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Bacopa", category: "Focus/Memory", uses: "Studied for memory support and cognitive function. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "St. John’s Wort", category: "Mood Support", uses: "Studied for mood support and mild depression relief. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Biotin", category: "Skin & Hair", uses: "Studied for hair and skin health. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Low" },
+      { name: "Green Tea Extract", category: "Weight Loss", uses: "Studied for weight management and metabolism support. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Vitamin D", category: "Joint & Bone Health", uses: "Studied for bone health and calcium absorption. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Vitamin B12", category: "Energy & Metabolism", uses: "Studied for energy support and nerve function. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Magnesium", category: "Sleep", uses: "Studied for muscle relaxation and sleep support. Source: NIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Turmeric", category: "Joint & Bone Health", uses: "Studied for anti-inflammatory effects and joint health. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "CoQ10", category: "Heart & Circulation", uses: "Studied for heart health and energy production. Source: Mayo Clinic.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Zinc", category: "Immune Support", uses: "Studied for immune function and wound healing. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Calcium", category: "Joint & Bone Health", uses: "Studied for bone strength and osteoporosis prevention. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Echinacea", category: "Immune Support", uses: "Studied for immune support and cold prevention. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Low" },
+      { name: "Collagen", category: "Skin & Hair", uses: "Studied for skin elasticity and joint health. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Rhodiola", category: "Anxiety/Stress", uses: "Studied for stress relief and mental fatigue reduction. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "DHEA", category: "Men’s Health", uses: "Studied for hormonal balance and aging support. Source: Mayo Clinic.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Low" },
+      { name: "Iron", category: "Energy & Metabolism", uses: "Studied for anemia prevention and energy support. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "High" },
+      { name: "Vitamin E", category: "Immune Support", uses: "Studied for antioxidant properties and immune health. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Milk Thistle", category: "Digestion & Gut Health", uses: "Studied for liver health and detoxification support. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "L-Theanine", category: "Anxiety/Stress", uses: "Studied for relaxation and stress reduction. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Cranberry", category: "Women’s Health", uses: "Studied for urinary tract health. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" }
     ];
 
     const categories = [
@@ -50,6 +60,7 @@
           <li><a href="#" onClick={() => setPage('home')} className="hover:underline">Home</a></li>
           <li><a href="#" onClick={() => setPage('search')} className="hover:underline">Search</a></li>
           <li><a href="#" onClick={() => setPage('quiz')} className="hover:underline">Adaptive Quiz</a></li>
+          <li><a href="#" onClick={() => setPage('compare')} className="hover:underline">Compare</a></li>
           <li><a href="#" onClick={() => setPage('features')} className="hover:underline">Features</a></li>
           <li><a href="#" onClick={() => setPage('resources')} className="hover:underline">Resources</a></li>
           <li><a href="#" onClick={() => setPage('disclaimer')} className="hover:underline">Disclaimer</a></li>
@@ -66,14 +77,14 @@
         const result = supplementData.find(
           item => regex.test(item.name)
         );
-        setResults(result || { name: query, uses: "No information found. Try another supplement (e.g., Melatonin, Omega-3).", disclaimer: "For educational purposes only; consult a healthcare provider." });
+        setResults(result || { name: query, uses: "No information found. Try another supplement (e.g., Melatonin, Omega-3).", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" });
       };
 
       const handleCategoryClick = (category) => {
         const categoryResults = supplementData.filter(
           item => item.category === category
         );
-        setResults(categoryResults.length ? categoryResults[0] : { name: category, uses: "No supplements found for this category.", disclaimer: "For educational purposes only; consult a healthcare provider." });
+        setResults(categoryResults.length ? categoryResults[0] : { name: category, uses: "No supplements found for this category.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" });
       };
 
       return (
@@ -129,6 +140,9 @@
               <h2 className="text-2xl font-semibold">{results.name}</h2>
               <p className="text-lg">{results.uses}</p>
               <p className="text-sm italic mt-2">{results.disclaimer}</p>
+              <p className="text-lg mt-2">
+                Effectiveness: {results.effectiveness === "High" ? "🟢 High" : results.effectiveness === "Moderate" ? "🟡 Moderate" : results.effectiveness === "Low" ? "🔴 Low" : "N/A"}
+              </p>
             </div>
           )}
         </div>
@@ -144,12 +158,18 @@
         const result = supplementData.find(
           item => regex.test(item.name)
         );
-        setResults(result || { name: query, uses: "No information found. Try another supplement (e.g., Melatonin, Omega-3).", disclaimer: "For educational purposes only; consult a healthcare provider." });
+        setResults(result || { name: query, uses: "No information found. Try another supplement (e.g., Melatonin, Omega-3).", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" });
       };
 
       return (
         <div className="container mx-auto p-4">
           <h1 className="text-3xl font-bold mb-4">Supplement Search</h1>
+          <button
+            onClick={() => window.location.hash = 'home'}
+            className="mb-4 bg-blue-500 text-white p-2 rounded"
+          >
+            Back to Home
+          </button>
           <input
             type="text"
             value={query}
@@ -168,6 +188,9 @@
               <h2 className="text-2xl font-semibold">{results.name}</h2>
               <p className="text-lg">{results.uses}</p>
               <p className="text-sm italic mt-2">{results.disclaimer}</p>
+              <p className="text-lg mt-2">
+                Effectiveness: {results.effectiveness === "High" ? "🟢 High" : results.effectiveness === "Moderate" ? "🟡 Moderate" : results.effectiveness === "Low" ? "🔴 Low" : "N/A"}
+              </p>
             </div>
           )}
           {!results && (
@@ -177,17 +200,161 @@
       );
     };
 
+    const Compare = () => {
+      const [supplement1, setSupplement1] = useState('');
+      const [supplement2, setSupplement2] = useState('');
+      const [results, setResults] = useState(null);
+
+      const handleCompare = () => {
+        const regex1 = new RegExp(supplement1.trim().replace(/\s+/g, '.*'), 'i');
+        const regex2 = new RegExp(supplement2.trim().replace(/\s+/g, '.*'), 'i');
+        const result1 = supplementData.find(item => regex1.test(item.name)) || { name: supplement1, uses: "Not found", category: "N/A", disclaimer: "N/A", effectiveness: "N/A" };
+        const result2 = supplementData.find(item => regex2.test(item.name)) || { name: supplement2, uses: "Not found", category: "N/A", disclaimer: "N/A", effectiveness: "N/A" };
+        setResults({ supplement1: result1, supplement2: result2 });
+      };
+
+      return (
+        <div className="container mx-auto p-4">
+          <h1 className="text-3xl font-bold mb-4">Compare Supplements</h1>
+          <button
+            onClick={() => window.location.hash = 'home'}
+            className="mb-4 bg-blue-500 text-white p-2 rounded"
+          >
+            Back to Home
+          </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input
+              type="text"
+              value={supplement1}
+              onChange={(e) => setSupplement1(e.target.value)}
+              placeholder="Enter first supplement (e.g., Melatonin)"
+              className="p-3 border rounded text-lg"
+            />
+            <input
+              type="text"
+              value={supplement2}
+              onChange={(e) => setSupplement2(e.target.value)}
+              placeholder="Enter second supplement (e.g., Magnesium)"
+              className="p-3 border rounded text-lg"
+            />
+          </div>
+          <button
+            onClick={handleCompare}
+            className="bg-blue-500 text-white p-3 rounded"
+          >
+            Compare
+          </button>
+          {results && (
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 border rounded">
+                <h2 className="text-2xl font-semibold">{results.supplement1.name}</h2>
+                <p className="text-lg">Category: {results.supplement1.category}</p>
+                <p className="text-lg">{results.supplement1.uses}</p>
+                <p className="text-sm italic mt-2">{results.supplement1.disclaimer}</p>
+                <p className="text-lg mt-2">
+                  Effectiveness: {results.supplement1.effectiveness === "High" ? "🟢 High" : results.supplement1.effectiveness === "Moderate" ? "🟡 Moderate" : results.supplement1.effectiveness === "Low" ? "🔴 Low" : "N/A"}
+                </p>
+              </div>
+              <div className="p-4 border rounded">
+                <h2 className="text-2xl font-semibold">{results.supplement2.name}</h2>
+                <p className="text-lg">Category: {results.supplement2.category}</p>
+                <p className="text-lg">{results.supplement2.uses}</p>
+                <p className="text-sm italic mt-2">{results.supplement2.disclaimer}</p>
+                <p className="text-lg mt-2">
+                  Effectiveness: {results.supplement2.effectiveness === "High" ? "🟢 High" : results.supplement2.effectiveness === "Moderate" ? "🟡 Moderate" : results.supplement2.effectiveness === "Low" ? "🔴 Low" : "N/A"}
+                </p>
+              </div>
+            </div>
+          )}
+          {!results && (
+            <p className="text-lg mt-4">Enter two supplements to compare!</p>
+          )}
+        </div>
+      );
+    };
+
+    const FeedbackForm = () => {
+      const [feedback, setFeedback] = useState('');
+      const [rating, setRating] = useState('');
+      const [email, setEmail] = useState('');
+      const [submitted, setSubmitted] = useState(false);
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Feedback submitted:', { feedback, rating, email });
+        setSubmitted(true);
+        setFeedback('');
+        setRating('');
+        setEmail('');
+      };
+
+      return (
+        <div className="container mx-auto p-4">
+          <h1 className="text-3xl font-bold mb-4">Feedback</h1>
+          <button
+            onClick={() => window.location.hash = 'home'}
+            className="mb-4 bg-blue-500 text-white p-2 rounded"
+          >
+            Back to Home
+          </button>
+          {submitted ? (
+            <p className="text-lg mb-4">Thank you for your feedback!</p>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <textarea
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                placeholder="Share your feedback about MySupplement..."
+                className="w-full p-3 border rounded text-lg mb-4"
+                rows="5"
+              />
+              <select
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                className="w-full p-3 border rounded text-lg mb-4"
+              >
+                <option value="">Rate usability (1-5 stars)</option>
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
+              </select>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter email (optional)"
+                className="w-full p-3 border rounded text-lg mb-4"
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white p-3 rounded"
+              >
+                Submit Feedback
+              </button>
+            </form>
+          )}
+        </div>
+      );
+    };
+
     const Resources = ({ setPage }) => (
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">Resources</h1>
+        <button
+          onClick={() => window.location.hash = 'home'}
+          className="mb-4 bg-blue-500 text-white p-2 rounded"
+        >
+          Back to Home
+        </button>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <a
-            href="https://forms.gle/feedback-form-placeholder"
-            target="_blank"
+          <button
+            onClick={() => setPage('feedback')}
             className="p-4 bg-gray-100 rounded text-lg hover:bg-gray-200"
           >
             Feedback
-          </a>
+          </button>
           <button
             onClick={() => setPage('quiz')}
             className="p-4 bg-gray-100 rounded text-lg hover:bg-gray-200"
@@ -201,6 +368,12 @@
     const Features = () => (
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">Features</h1>
+        <button
+          onClick={() => window.location.hash = 'home'}
+          className="mb-4 bg-blue-500 text-white p-2 rounded"
+        >
+          Back to Home
+        </button>
         <h2 className="text-2xl font-semibold mb-2">Why We Developed MySupplement</h2>
         <p className="text-lg mb-4">
           To provide a free, factual, user-friendly platform delivering evidence-based supplement information, aligning with “AI Engineered, Human Inspired” and “Fast. Clear. Concise” for broad engagement.
@@ -213,10 +386,11 @@
         </ul>
         <h2 className="text-2xl font-semibold mb-2">Sample Supplement Facts</h2>
         <ul className="list-disc pl-6 text-lg">
-          <li>Melatonin: Studied for sleep support. Source: NIH.</li>
-          <li>Omega-3: Studied for cardiovascular health. Source: PubMed.</li>
-          <li>Vitamin D: Studied for bone health. Source: ODS.</li>
-          <li>Zinc: Studied for immune function. Source: ODS.</li>
+          <li>Melatonin: Studied for sleep support. Source: NIH. 🟢 High</li>
+          <li>Omega-3: Studied for cardiovascular health. Source: PubMed. 🟢 High</li>
+          <li>Vitamin D: Studied for bone health. Source: ODS. 🟢 High</li>
+          <li>Zinc: Studied for immune function. Source: ODS. 🟢 High</li>
+          <li>Collagen: Studied for skin and joint health. Source: PubMed. 🟡 Moderate</li>
         </ul>
       </div>
     );
@@ -224,6 +398,12 @@
     const Disclaimer = () => (
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">Disclaimer</h1>
+        <button
+          onClick={() => window.location.hash = 'home'}
+          className="mb-4 bg-blue-500 text-white p-2 rounded"
+        >
+          Back to Home
+        </button>
         <p className="text-lg">
           Information provided is for educational purposes only and not intended as medical advice. Consult a healthcare provider before using supplements.
         </p>
@@ -233,42 +413,85 @@
     const AdaptiveQuiz = () => {
       const [currentQuestion, setCurrentQuestion] = useState(0);
       const [score, setScore] = useState(0);
+      const [answers, setAnswers] = useState([]);
 
       const questions = [
         {
           question: "Which supplement is studied for sleep support?",
           options: ["Melatonin", "Vitamin C", "Caffeine", "Glucosamine"],
           correct: "Melatonin",
-          source: "Source: NIH."
+          source: "Source: NIH.",
+          explanation: "Melatonin is widely studied for regulating sleep cycles, especially for insomnia. Source: NIH."
         },
         {
           question: "Which supplement is studied for heart health?",
           options: ["Biotin", "Omega-3", "Bacopa", "Probiotics"],
           correct: "Omega-3",
-          source: "Source: PubMed."
+          source: "Source: PubMed.",
+          explanation: "Omega-3 fatty acids are studied for reducing inflammation and supporting cardiovascular health. Source: PubMed."
         },
         {
           question: "Which supplement is studied for memory support?",
           options: ["Lutein", "Evening Primrose", "Bacopa", "Green Tea Extract"],
           correct: "Bacopa",
-          source: "Source: PubMed."
+          source: "Source: PubMed.",
+          explanation: "Bacopa is studied for enhancing memory and cognitive function. Source: PubMed."
         },
         {
           question: "Which supplement is studied for joint health?",
           options: ["Turmeric", "Ashwagandha", "Saw Palmetto", "Magnesium"],
           correct: "Turmeric",
-          source: "Source: PubMed."
+          source: "Source: PubMed.",
+          explanation: "Turmeric contains curcumin, studied for its anti-inflammatory effects on joint health. Source: PubMed."
         },
         {
           question: "Which supplement is studied for immune function?",
           options: ["CoQ10", "Zinc", "Ginkgo", "Caffeine"],
           correct: "Zinc",
-          source: "Source: ODS."
+          source: "Source: ODS.",
+          explanation: "Zinc is essential for immune function and wound healing. Source: ODS."
+        },
+        {
+          question: "Which supplement is studied for women’s health?",
+          options: ["Evening Primrose", "Calcium", "Ginkgo", "Probiotics"],
+          correct: "Evening Primrose",
+          source: "Source: NCCIH.",
+          explanation: "Evening Primrose is studied for hormonal balance and menopausal symptoms. Source: NCCIH."
+        },
+        {
+          question: "Which supplement is studied for skin health?",
+          options: ["Collagen", "Magnesium", "Rhodiola", "Vitamin C"],
+          correct: "Collagen",
+          source: "Source: PubMed.",
+          explanation: "Collagen is studied for improving skin elasticity and joint health. Source: PubMed."
+        },
+        {
+          question: "Which supplement is studied for men’s health?",
+          options: ["Saw Palmetto", "Lutein", "Biotin", "Cranberry"],
+          correct: "Saw Palmetto",
+          source: "Source: NIH.",
+          explanation: "Saw Palmetto is studied for prostate health and urinary function in men. Source: NIH."
+        },
+        {
+          question: "Which supplement is studied for digestion?",
+          options: ["Milk Thistle", "Vitamin D", "CoQ10", "L-Theanine"],
+          correct: "Milk Thistle",
+          source: "Source: NCCIH.",
+          explanation: "Milk Thistle is studied for supporting liver health and digestion. Source: NCCIH."
+        },
+        {
+          question: "Which supplement is studied for energy support?",
+          options: ["Iron", "Ginkgo", "Echinacea", "Turmeric"],
+          correct: "Iron",
+          source: "Source: ODS.",
+          explanation: "Iron is studied for preventing anemia and supporting energy levels. Source: ODS."
         }
       ];
 
       const handleAnswer = (answer) => {
-        if (answer === questions[currentQuestion].correct) {
+        const isCorrect = answer === questions[currentQuestion].correct;
+        setAnswers([...answers, { question: questions[currentQuestion].question, selected: answer, isCorrect, correct: questions[currentQuestion].correct, explanation: questions[currentQuestion].explanation }]);
+        if (isCorrect) {
           setScore(score + 1);
         }
         setCurrentQuestion(currentQuestion + 1);
@@ -277,6 +500,12 @@
       return (
         <div className="container mx-auto p-4">
           <h1 className="text-3xl font-bold mb-4">Adaptive Quiz</h1>
+          <button
+            onClick={() => window.location.hash = 'home'}
+            className="mb-4 bg-blue-500 text-white p-2 rounded"
+          >
+            Back to Home
+          </button>
           {currentQuestion < questions.length ? (
             <div className="p-4 border rounded">
               <p className="text-lg mb-4">{questions[currentQuestion].question}</p>
@@ -297,8 +526,21 @@
             <div className="p-4 border rounded">
               <p className="text-lg">Quiz Complete! Your score: {score}/{questions.length}</p>
               <p className="text-sm italic">For educational purposes only; consult a healthcare provider.</p>
+              <h2 className="text-2xl font-semibold mt-4">Your Answers</h2>
+              {answers.map((answer, index) => (
+                <div key={index} className="mt-2">
+                  <p className="text-lg">{answer.question}</p>
+                  <p className="text-lg">Your answer: {answer.selected} {answer.isCorrect ? "✅ Correct" : "❌ Incorrect"}</p>
+                  {!answer.isCorrect && (
+                    <>
+                      <p className="text-lg">Correct answer: {answer.correct}</p>
+                      <p className="text-lg">{answer.explanation}</p>
+                    </>
+                  )}
+                </div>
+              ))}
               <button
-                onClick={() => { setCurrentQuestion(0); setScore(0); }}
+                onClick={() => { setCurrentQuestion(0); setScore(0); setAnswers([]); }}
                 className="mt-4 bg-blue-500 text-white p-3 rounded"
               >
                 Restart Quiz
@@ -317,10 +559,12 @@
           <NavBar setPage={setPage} />
           {page === 'home' && <Home setPage={setPage} />}
           {page === 'search' && <Search />}
+          {page === 'compare' && <Compare />}
           {page === 'resources' && <Resources setPage={setPage} />}
           {page === 'features' && <Features />}
-          {page === 'disclaimer' && <Disclaimer />}
+          {page == 'disclaimer' && <Disclaimer />}
           {page === 'quiz' && <AdaptiveQuiz />}
+          {page === 'feedback' && <FeedbackForm />}
         </div>
       );
     };
@@ -328,3 +572,4 @@
     ReactDOM.render(<App />, document.getElementById('root'));
   </script>
 </body>
+</html>
