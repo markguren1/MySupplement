@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,6 +8,11 @@ DOCTYPE html>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-size: 1.2rem; }
+    h1, h2 { font-size: 2rem; }
+    @media (max-width: 768px) { body { font-size: 1.1rem; } }
+  </style>
 </head>
 <body>
   <div id="root"></div>
@@ -45,7 +50,9 @@ DOCTYPE html>
       { name: "Vitamin E", category: "Immune Support", uses: "Studied for antioxidant properties and immune health. Source: ODS.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
       { name: "Milk Thistle", category: "Digestion & Gut Health", uses: "Studied for liver health and detoxification support. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
       { name: "L-Theanine", category: "Anxiety/Stress", uses: "Studied for relaxation and stress reduction. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
-      { name: "Cranberry", category: "Women’s Health", uses: "Studied for urinary tract health. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" }
+      { name: "Cranberry", category: "Women’s Health", uses: "Studied for urinary tract health. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "GABA", category: "Anxiety/Stress", uses: "Studied for calming effects and anxiety reduction. Source: PubMed.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" },
+      { name: "Garlic", category: "Heart & Circulation", uses: "Studied for cardiovascular health and immune support. Source: NCCIH.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "Moderate" }
     ];
 
     const categories = [
@@ -77,14 +84,16 @@ DOCTYPE html>
         const result = supplementData.find(
           item => regex.test(item.name)
         );
-        setResults(result || { name: query, uses: "No information found. Try another supplement (e.g., Melatonin, Omega-3).", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" });
+        setResults(result || { name: query, uses: "No information found. Try another supplement (e.g., Melatonin, GABA).", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" });
       };
 
       const handleCategoryClick = (category) => {
-        const categoryResults = supplementData.filter(
-          item => item.category === category
-        );
-        setResults(categoryResults.length ? categoryResults[0] : { name: category, uses: "No supplements found for this category.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" });
+        const categoryResults = supplementData.filter(item => item.category === category);
+        if (categoryResults.length > 0) {
+          setResults(categoryResults); // Set results to an array of matching supplements
+        } else {
+          setResults([{ name: category, uses: "No supplements found for this category.", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" }]);
+        }
       };
 
       return (
@@ -125,7 +134,7 @@ DOCTYPE html>
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search supplement (e.g., Melatonin, Vitamin D)"
+              placeholder="Search supplement (e.g., Melatonin, GABA)"
               className="w-full p-3 border rounded text-lg"
             />
             <button
@@ -136,13 +145,28 @@ DOCTYPE html>
             </button>
           </div>
           {results && (
-            <div className="mt-4 p-4 border rounded">
-              <h2 className="text-2xl font-semibold">{results.name}</h2>
-              <p className="text-lg">{results.uses}</p>
-              <p className="text-sm italic mt-2">{results.disclaimer}</p>
-              <p className="text-lg mt-2">
-                Effectiveness: {results.effectiveness === "High" ? "🟢 High" : results.effectiveness === "Moderate" ? "🟡 Moderate" : results.effectiveness === "Low" ? "🔴 Low" : "N/A"}
-              </p>
+            <div className="mt-4">
+              {Array.isArray(results) ? (
+                results.map((result, index) => (
+                  <div key={index} className="p-4 border rounded mb-4">
+                    <h2 className="text-2xl font-semibold">{result.name}</h2>
+                    <p className="text-lg">{result.uses}</p>
+                    <p className="text-sm italic mt-2">{result.disclaimer}</p>
+                    <p className="text-lg mt-2">
+                      Effectiveness: {result.effectiveness === "High" ? "🟢 High" : result.effectiveness === "Moderate" ? "🟡 Moderate" : result.effectiveness === "Low" ? "🔴 Low" : "N/A"}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div className="p-4 border rounded">
+                  <h2 className="text-2xl font-semibold">{results.name}</h2>
+                  <p className="text-lg">{results.uses}</p>
+                  <p className="text-sm italic mt-2">{results.disclaimer}</p>
+                  <p className="text-lg mt-2">
+                    Effectiveness: {results.effectiveness === "High" ? "🟢 High" : results.effectiveness === "Moderate" ? "🟡 Moderate" : results.effectiveness === "Low" ? "🔴 Low" : "N/A"}
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -158,7 +182,7 @@ DOCTYPE html>
         const result = supplementData.find(
           item => regex.test(item.name)
         );
-        setResults(result || { name: query, uses: "No information found. Try another supplement (e.g., Melatonin, Omega-3).", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" });
+        setResults(result || { name: query, uses: "No information found. Try another supplement (e.g., Melatonin, GABA).", disclaimer: "For educational purposes only; consult a healthcare provider.", effectiveness: "N/A" });
       };
 
       return (
@@ -174,7 +198,7 @@ DOCTYPE html>
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Enter supplement name (e.g., Glucosamine, Zinc)"
+            placeholder="Enter supplement name (e.g., Glucosamine, Garlic)"
             className="w-full p-3 mb-4 border rounded text-lg"
           />
           <button
@@ -234,7 +258,7 @@ DOCTYPE html>
               type="text"
               value={supplement2}
               onChange={(e) => setSupplement2(e.target.value)}
-              placeholder="Enter second supplement (e.g., Magnesium)"
+              placeholder="Enter second supplement (e.g., GABA)"
               className="p-3 border rounded text-lg"
             />
           </div>
@@ -300,7 +324,7 @@ DOCTYPE html>
           {submitted ? (
             <p className="text-lg mb-4">Thank you for your feedback!</p>
           ) : (
-            <form onSubmit={handleSubmit}>
+            <div>
               <textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
@@ -328,12 +352,12 @@ DOCTYPE html>
                 className="w-full p-3 border rounded text-lg mb-4"
               />
               <button
-                type="submit"
+                onClick={handleSubmit}
                 className="bg-blue-500 text-white p-3 rounded"
               >
                 Submit Feedback
               </button>
-            </form>
+            </div>
           )}
         </div>
       );
@@ -390,7 +414,7 @@ DOCTYPE html>
           <li>Omega-3: Studied for cardiovascular health. Source: PubMed. 🟢 High</li>
           <li>Vitamin D: Studied for bone health. Source: ODS. 🟢 High</li>
           <li>Zinc: Studied for immune function. Source: ODS. 🟢 High</li>
-          <li>Collagen: Studied for skin and joint health. Source: PubMed. 🟡 Moderate</li>
+          <li>GABA: Studied for calming effects. Source: PubMed. 🟡 Moderate</li>
         </ul>
       </div>
     );
@@ -480,11 +504,11 @@ DOCTYPE html>
           explanation: "Milk Thistle is studied for supporting liver health and digestion. Source: NCCIH."
         },
         {
-          question: "Which supplement is studied for energy support?",
-          options: ["Iron", "Ginkgo", "Echinacea", "Turmeric"],
-          correct: "Iron",
-          source: "Source: ODS.",
-          explanation: "Iron is studied for preventing anemia and supporting energy levels. Source: ODS."
+          question: "Which supplement is studied for calming effects?",
+          options: ["Garlic", "GABA", "Iron", "Vitamin E"],
+          correct: "GABA",
+          source: "Source: PubMed.",
+          explanation: "GABA is studied for its calming effects and anxiety reduction. Source: PubMed."
         }
       ];
 
@@ -562,7 +586,7 @@ DOCTYPE html>
           {page === 'compare' && <Compare />}
           {page === 'resources' && <Resources setPage={setPage} />}
           {page === 'features' && <Features />}
-          {page == 'disclaimer' && <Disclaimer />}
+          {page === 'disclaimer' && <Disclaimer />}
           {page === 'quiz' && <AdaptiveQuiz />}
           {page === 'feedback' && <FeedbackForm />}
         </div>
